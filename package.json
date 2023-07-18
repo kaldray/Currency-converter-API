@@ -1,0 +1,13 @@
+{
+  "name": "e-lycee",
+  "version": "1.0.0",
+  "description": "A currency converter",
+  "scripts": {
+    "admin":  "cd admin && pnpm run dev",
+    "api": "docker compose up -d",
+    "dev": "pnpm api && pnpm admin"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
