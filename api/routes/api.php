@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ApiPublicAvailbleDevises;
+use App\Http\Controllers\ApiPublicStateController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login', [LoginController::class, "index"]);
 Route::get('/logout', [LogoutController::class, "index"]);
 Route::get('/devises/available',[ApiPublicAvailbleDevises::class,"available"]);
+Route::get('/state',[ApiPublicStateController::class,"state"]);
