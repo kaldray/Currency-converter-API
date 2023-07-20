@@ -20,8 +20,8 @@ class PaireFactory extends Factory
         return [
             "from" => Devise::factory()->create()->name,
             "to" => Devise::factory()->create()->name,
-            "convertion_rate" => fake()->randomFloat(2, 0, 10),
-            "convertion_number" => fake()->randomDigitNotNull(),
+            "conversion_rate" => fake()->randomFloat(2, 0, 10),
+            "conversion_number" => fake()->randomDigitNotNull(),
         ];
     }
 }

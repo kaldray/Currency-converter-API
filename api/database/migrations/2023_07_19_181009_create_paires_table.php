@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string("from");
             $table->string("to");
             $table->unique(['from', "to"]);
-            $table->float("convertion_rate", 8, 2, true);
-            $table->unsignedInteger("convertion_number");
+            $table->float("conversion_rate", 8, 2, true);
+            $table->unsignedInteger("conversion_number");
             $table->timestamps();
 
             $table->foreign("from")->references("name")->on("devises");
