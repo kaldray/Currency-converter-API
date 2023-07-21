@@ -47,7 +47,7 @@ export const signOut = async () => {
 };
 
 /**
- *  @typedef {{ from: string,to: string,convertedAmount;number }} Pair
+ *  @typedef {{ from: string,to: string,conversion_number:number }} Pair
  *  @typedef {{data:Pair[]}} Pairs
  * */
 

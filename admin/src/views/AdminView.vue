@@ -12,12 +12,14 @@ const { pairs, error } = usePairs();
     <thead class="border">
       <tr>
         <th class="text-center font-weight-bold">Paires</th>
+        <th class="text-center font-weight-bold">Nombre de requête</th>
         <th class="text-center font-weight-bold">Supprimer</th>
       </tr>
     </thead>
     <tbody class="border">
       <tr v-for="p in pairs.data">
         <td class="text-center">{{ p.to }}-{{ p.from }}</td>
+        <td class="text-center">{{ p.conversion_number }}</td>
         <td class="text-center">
           <v-btn color="red" text="Supprimer"></v-btn>
         </td>
