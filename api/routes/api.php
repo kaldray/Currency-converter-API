@@ -18,12 +18,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware("auth:sanctum")->group(function () {
+  Route::apiResource("pairs", \App\Http\Controllers\PaireController::class);
 });
 
-Route::post('/login', [LoginController::class, "index"]);
-Route::get('/logout', [LogoutController::class, "index"]);
-Route::get('/devises/available',[ApiPublicAvailbleDevises::class,"available"]);
-Route::get('/{from}/{amount}/{to}',[ApiPublicAvailbleDevises::class,"conversion"]);
-Route::get('/state',[ApiPublicStateController::class,"state"]);
+Route::post("/login", [LoginController::class, "index"]);
+Route::get("/logout", [LogoutController::class, "index"]);
+Route::get("/devises/available", [
+  ApiPublicAvailbleDevises::class,
+  "available",
+]);
+Route::get("/{from}/{amount}/{to}", [
+  ApiPublicAvailbleDevises::class,
+  "conversion",
+]);
+Route::get("/state", [ApiPublicStateController::class, "state"]);

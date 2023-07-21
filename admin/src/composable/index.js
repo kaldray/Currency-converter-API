@@ -2,7 +2,7 @@ import { ref } from "vue";
 import { getPairs } from "@/api/index.js";
 
 /**
- * @typedef {{ from: string,to: string,conversion_number:number }} Pair
+ * @typedef {{ from: string,to: string,conversion_number:number,id:number }} Pair
  *  @typedef {{data:Pair[]}} Pairs
  * */
 

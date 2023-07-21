@@ -12,7 +12,7 @@ class ApiPublicAvailbleDevises extends Controller
   public function available()
   {
     return new ApiPublicAvailbleDevisesCollection(
-      Paire::all(["from", "to", "conversion_number"])
+      Paire::all(["from", "to", "conversion_number", "id"])
     );
   }
 

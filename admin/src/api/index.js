@@ -68,6 +68,6 @@ export const getPairs = async () => {
  * @returns {Promise<any>}
  */
 export const deletePairs = async (id) => {
-  const resonse = await apiClient.delete(`/pairs/${id}`);
-  return resonse.data;
+  const response = await apiClient.delete(`/pairs/${id}`);
+  return response.data;
 };
