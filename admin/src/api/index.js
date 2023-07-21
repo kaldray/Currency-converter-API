@@ -32,16 +32,30 @@ export const getCsrfToken = async () => {
 
 /**
  *
- * @param {{ email:string,password:string }} creditials
+ * @param {{ email:string,password:string }} credentials
  * @returns {Promise<{message:string,status:number,user:{email:string,name:string}}>}
  */
-export const signIn = async (creditials) => {
+export const signIn = async (credentials) => {
   await getCsrfToken();
-  const response = await apiClient.post("/login", creditials);
+  const response = await apiClient.post("/login", credentials);
   return response.data;
 };
 
 export const signOut = async () => {
   const response = await apiClient.get("/logout");
   return response.data;
+};
+
+/**
+ *  @typedef {{ from: string,to: string,convertedAmount;number }} Pair
+ *  @typedef {{data:Pair[]}} Pairs
+ * */
+
+/**
+ * Return the list of available paris
+ * @returns {Promise<Pairs>}
+ */
+export const getPairs = async () => {
+  const resonse = await apiClient.get("/devises/available");
+  return resonse.data;
 };
