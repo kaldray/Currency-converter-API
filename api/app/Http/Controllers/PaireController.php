@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PaireRequest;
 use App\Models\Paire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\Session\FlashBagAwareSessionInterface;
 
 class PaireController extends Controller
 {
@@ -35,9 +37,18 @@ class PaireController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, Paire $paire)
+  public function update(PaireRequest $request, Paire $paire)
   {
-    //
+    try {
+      $validateData = $request->validated();
+      $paire->update($validateData);
+      return Response::json([
+        "message" => "La paire a bien été modifié.",
+        "status" => \Illuminate\Http\Response::HTTP_OK,
+      ]);
+    } catch (\Exception $exception) {
+      return $exception;
+    }
   }
 
   /**

@@ -30,7 +30,7 @@ export const useAuthStore = defineStore(
         const response = await signOut();
         if (response.status === 200) {
           user.value = null;
-          router.push("/");
+          router.push("/list");
         }
       } catch (err) {
         error.value = err;
@@ -42,3 +42,11 @@ export const useAuthStore = defineStore(
     persist: true,
   },
 );
+
+export const usePairStore = defineStore("pair", () => {
+  const pair = ref(null);
+  const setPair = (data) => {
+    pair.value = data;
+  };
+  return { pair, setPair };
+});

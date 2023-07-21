@@ -49,7 +49,7 @@ export const signOut = async () => {
 };
 
 /**
- * @typedef {{ from: string,to: string,conversion_number:number,id:number }} Pair
+ * @typedef {{ from: string,to: string,conversion_number:number,id:number,conversion_rate:number }} Pair
  *  @typedef {{data:Pair[]}} Pairs
  * */
 
@@ -68,6 +68,16 @@ export const getPairs = async () => {
  * @returns {Promise<any>}
  */
 export const deletePairs = async (id) => {
-  const response = await apiClient.delete(`/pairs/${id}`);
+  const response = await apiClient.delete(`/paire/${id}`);
+  return response.data;
+};
+
+/**
+ *
+ * @param {Pair} pair
+ * @returns {Promise<any>}
+ */
+export const modifyPair = async (pair) => {
+  const response = await apiClient.put(`/paire/${pair.id}`, pair);
   return response.data;
 };

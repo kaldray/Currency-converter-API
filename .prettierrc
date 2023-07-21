@@ -5,5 +5,6 @@
   "singleQuote": false,
   "singleAttributePerLine": false,
   "plugins": ["@prettier/plugin-php"],
-  "pluginSearchDirs": false
+  "pluginSearchDirs": false,
+  "printWidth":100
 }
