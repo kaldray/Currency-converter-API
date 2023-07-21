@@ -2,9 +2,11 @@ import axios, { AxiosError } from "axios";
 
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_ENDPOINT,
+  withCredentials: true,
   headers: {
     Accept: "Content-Type",
     "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
   },
 });
 
@@ -47,7 +49,7 @@ export const signOut = async () => {
 };
 
 /**
- *  @typedef {{ from: string,to: string,conversion_number:number }} Pair
+ * @typedef {{ from: string,to: string,conversion_number:number,id:number }} Pair
  *  @typedef {{data:Pair[]}} Pairs
  * */
 
@@ -57,5 +59,15 @@ export const signOut = async () => {
  */
 export const getPairs = async () => {
   const resonse = await apiClient.get("/devises/available");
+  return resonse.data;
+};
+
+/**
+ *
+ * @param {number} id
+ * @returns {Promise<any>}
+ */
+export const deletePairs = async (id) => {
+  const resonse = await apiClient.delete(`/pairs/${id}`);
   return resonse.data;
 };
