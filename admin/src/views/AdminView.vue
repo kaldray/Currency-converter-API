@@ -3,10 +3,15 @@ import { useRouter } from "vue-router";
 import { usePairs } from "@/composable/index.js";
 import { deletePairs } from "@/api/index.js";
 import { usePairStore } from "@/store/index.js";
+import { onMounted } from "vue";
 
 const { pairs, error } = usePairs();
 const pairStore = usePairStore();
 const router = useRouter();
+
+onMounted(() => {
+  pairStore.setPair(null);
+});
 
 /**
  * Delete the pairs from the DB
@@ -34,6 +39,9 @@ const redirectToUpdatePage = (data) => {
 <template>
   <v-col justify="center" class="text-center">
     <h1>Liste de paires disponible</h1>
+  </v-col>
+  <v-col>
+    <v-btn tag="a" to="/create" color="blue">Ajouter une paire</v-btn>
   </v-col>
   <v-table v-if="pairs" class="mt-5 border">
     <thead class="border">
@@ -68,5 +76,6 @@ const redirectToUpdatePage = (data) => {
       </tr>
     </tbody>
   </v-table>
+  <v-skeleton-loader class="mt-5" v-else></v-skeleton-loader>
   <v-alert v-if="error" type="error" :text="error"></v-alert>
 </template>
