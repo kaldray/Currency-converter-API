@@ -27,6 +27,8 @@ class ApiPublicAvailbleDevises extends Controller
         ]);
       }
       $newAmonut = $this->getNewConvertedAmount($paire->conversion_rate, $amount);
+      $paire->conversion_number = $paire->conversion_number + 1;
+      $paire->save();
       return Response::json(
         ["from" => $from, "to" => $to, "convertedAmount" => $newAmonut],
         \Illuminate\Http\Response::HTTP_OK
