@@ -19,7 +19,7 @@ export const useAuthStore = defineStore(
         const response = await signIn(creditials);
         if (response.status === 201) {
           user.value = response.user;
-          router.push("/admin");
+          router.push("/list");
         }
       } catch (err) {
         error.value = err;
@@ -30,7 +30,7 @@ export const useAuthStore = defineStore(
         const response = await signOut();
         if (response.status === 200) {
           user.value = null;
-          router.push("/list");
+          router.push("/");
         }
       } catch (err) {
         error.value = err;

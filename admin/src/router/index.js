@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
 import AdminView from "@/views/AdminView.vue";
 import UpdateView from "@/views/UpdateView.vue";
+import CreateView from "@/views/CreateView.vue";
 import { useAuthStore } from "@/store";
 
 const routes = [
@@ -23,7 +24,7 @@ const routes = [
   {
     path: "/create",
     name: "AdminCreate",
-    component: UpdateView,
+    component: CreateView,
   },
 ];
 
