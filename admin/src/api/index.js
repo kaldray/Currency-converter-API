@@ -1,5 +1,8 @@
 import axios, { AxiosError } from "axios";
 
+import { router } from "@/router/index.js";
+import { useAuthStore } from "@/store";
+
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_ENDPOINT,
   withCredentials: true,
@@ -22,6 +25,11 @@ apiClient.interceptors.response.use(
        * @constant {AxiosError} apiError
        */
       const apiError = error.response.data;
+      if (error.response.status === 401) {
+        const authStore = useAuthStore();
+        authStore.user.value = null;
+        router.replace("/");
+      }
       return Promise.reject(apiError);
     }
     return Promise.reject(error);
