@@ -1,9 +1,12 @@
 <script setup>
+import { ref } from "vue";
 import { modifyPair } from "@/api/index.js";
 import { usePairStore } from "@/store/index.js";
 import PairForm from "@/components/PairForm.vue";
 import { router } from "@/router/index.js";
+
 const pairStore = usePairStore();
+const errors = ref(null);
 
 async function emitUpdatePair(pair) {
   try {
@@ -11,12 +14,12 @@ async function emitUpdatePair(pair) {
     if (response.status === 200) {
       router.push("/list");
     }
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    errors.value = err;
   }
 }
 </script>
 
 <template>
-  <PairForm :pair="pairStore.pair" @update-pair="emitUpdatePair" />
+  <PairForm :pair="pairStore.pair" @update-pair="emitUpdatePair" :errors="errors" />
 </template>
