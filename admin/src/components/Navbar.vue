@@ -11,10 +11,9 @@ const isSmartphone = computed(() => {
 });
 
 const routes = [
-  { to: "/", text: "Déconnexion" },
-  { to: "/update", text: "Modifier" },
   { to: "/create", text: "Ajouter" },
   { to: "/list", text: "Liste" },
+  { to: "/", text: "Déconnexion" },
 ];
 
 /**
@@ -48,7 +47,7 @@ function signOut(to) {
     <v-toolbar-items v-else-if="authStore.user">
       <template v-for="{ to, text } in routes" :key="to">
         <v-btn :to="to" variant="text" @click.prevent="signOut(to)">{{ text }}</v-btn>
-        <v-divider vertical></v-divider>
+        <v-divider></v-divider>
       </template>
     </v-toolbar-items>
   </v-app-bar>
