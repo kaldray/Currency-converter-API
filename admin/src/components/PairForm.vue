@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, watch } from "vue";
+import { reactive } from "vue";
 
 const props = defineProps({ pair: Object, errors: Object || undefined });
 const emit = defineEmits(["updatePair", "createPair"]);
@@ -83,7 +83,8 @@ function emitEvent() {
           :text="props.errors?.errors.to[0]"
           type="warning"
         ></v-alert>
-        <v-btn type="submit" block color="blue" variant="flat">Modifier</v-btn>
+        <v-btn type="submit" block color="blue" variant="flat" v-if="props?.pair">Modifier</v-btn>
+        <v-btn type="submit" block color="blue" variant="flat" v-else>AJouter</v-btn>
       </v-col>
     </v-row>
   </v-form>
