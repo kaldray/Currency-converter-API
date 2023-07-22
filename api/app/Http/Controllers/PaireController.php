@@ -63,10 +63,10 @@ class PaireController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(int $id)
+  public function destroy(string $id)
   {
     try {
-      $res = Paire::destroy($id);
+      Paire::destroy($id);
       return Response::json(
         [
           "message" => "L'opération à été un succès",
