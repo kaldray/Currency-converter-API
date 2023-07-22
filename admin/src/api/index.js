@@ -4,7 +4,7 @@ const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_ENDPOINT,
   withCredentials: true,
   headers: {
-    Accept: "Content-Type",
+    Accept: "application/json",
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
   },
@@ -63,7 +63,7 @@ export const getPairs = async () => {
 };
 
 /**
- *
+ * Delete Pair
  * @param {number} id
  * @returns {Promise<any>}
  */
@@ -73,11 +73,21 @@ export const deletePairs = async (id) => {
 };
 
 /**
- *
+ * Update pairs
  * @param {Pair} pair
- * @returns {Promise<any>}
+ * @returns {Promise<{message:string,status:number}>}
  */
 export const modifyPair = async (pair) => {
   const response = await apiClient.put(`/paire/${pair.id}`, pair);
+  return response.data;
+};
+
+/**
+ * Add pairs
+ * @param {Pair} pair
+ * @returns {Promise<{message:string,status:number}>}
+ */
+export const addPair = async (pair) => {
+  const response = await apiClient.post(`/paire`, pair);
   return response.data;
 };
