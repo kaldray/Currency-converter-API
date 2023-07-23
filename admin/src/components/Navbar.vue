@@ -31,13 +31,16 @@ function signOut(to) {
   <v-app-bar color="blue" scroll-behavior="elevate">
     <v-app-bar-title>Currency</v-app-bar-title>
     <!-- Menu Mobile -->
-    <v-menu v-if="isSmartphone && authStore.user">
+    <v-menu v-if="isSmartphone">
       <template v-slot:activator="{ props }">
-        <v-app-bar-nav-icon v-bind="props" />
+        <v-app-bar-nav-icon border v-bind="props" />
       </template>
 
       <v-list>
-        <v-list-item to="/docs">Documentation</v-list-item>
+        <v-list-item to="/docs"> <v-list-item-title>Documentation</v-list-item-title> </v-list-item>
+        <v-list-item v-if="!authStore.user" to="/">
+          <v-list-item-title>Connexion</v-list-item-title>
+        </v-list-item>
         <v-list-item v-for="{ to, text } in routes" :to="to" :key="to">
           <v-list-item-title @click="signOut(to)">{{ text }}</v-list-item-title>
         </v-list-item>
@@ -45,8 +48,9 @@ function signOut(to) {
     </v-menu>
 
     <!-- Menu Desktop -->
-    <v-toolbar-items>
+    <v-toolbar-items v-else>
       <v-btn to="/docs" variant="text">Documentation</v-btn>
+      <v-btn to="/" variant="text" v-if="!authStore.user">Connexion</v-btn>
       <template v-if="authStore.user" v-for="{ to, text } in routes" :key="to">
         <v-btn :to="to" variant="text" @click.prevent="signOut(to)">{{ text }}</v-btn>
         <v-divider></v-divider>

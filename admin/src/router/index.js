@@ -17,10 +17,23 @@ import { useAuthStore } from "@/store";
  * @param {RouteRecordNormalized} from
  * @returns {{name:RouteRecordName}}
  */
-const isAuthenticated = (from) => {
+const isGuest = (from) => {
   const authStore = useAuthStore();
   if (authStore.user === null) {
     return { name: from.name };
+  }
+};
+
+/**
+ *
+ * @param {RouteRecordNormalized} from
+ * @param {RouteRecordNormalized} to
+ * @returns {{name:RouteRecordName}}
+ */
+const isAuthenticated = (to, from) => {
+  const authStore = useAuthStore();
+  if (authStore.user !== null && to.name === "Login" && from.name !== "Login") {
+    return { name: "Admin" };
   }
 };
 
@@ -33,6 +46,15 @@ const routes = [
     path: "/",
     name: "Login",
     component: HomeView,
+    /**
+     *
+     * @param {RouteRecordNormalized} to
+     * @param {RouteRecordNormalized} from
+     * @returns {{name:RouteRecordName}}
+     */
+    beforeEnter: (to, from) => {
+      return isAuthenticated(to, from);
+    },
   },
   {
     path: "/list",
@@ -45,7 +67,7 @@ const routes = [
      * @returns {{name:RouteRecordName}}
      */
     beforeEnter: (to, from) => {
-      return isAuthenticated(from);
+      return isGuest(from);
     },
   },
   {
@@ -59,7 +81,7 @@ const routes = [
      * @returns {{name:RouteRecordName}}
      */
     beforeEnter: (to, from) => {
-      return isAuthenticated(from);
+      return isGuest(from);
     },
   },
   {
@@ -73,13 +95,19 @@ const routes = [
      * @returns {{name:RouteRecordName}}
      */
     beforeEnter: (to, from) => {
-      return isAuthenticated(from);
+      return isGuest(from);
     },
   },
   {
     path: "/docs",
     name: "Docs",
     component: DocsView,
+    /**
+     *
+     * @param {RouteRecordNormalized} to
+     * @param {RouteRecordNormalized} from
+     * @returns {{name:RouteRecordName}}
+     */
   },
 ];
 
