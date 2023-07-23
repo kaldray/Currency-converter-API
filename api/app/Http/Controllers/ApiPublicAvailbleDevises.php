@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ApiPublicAvailableDevisesResource;
 use App\Models\Paire;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -19,22 +20,22 @@ class ApiPublicAvailbleDevises extends Controller
   public function conversion(Request $request, string $from, string $amount, string $to)
   {
     try {
-      $paire = Paire::where([["from", $from], ["to", $to]])->first();
-      if ($paire == null) {
-        return Response::json([
-          "message" => "Désole, cette paire de conversion n'existe pas.",
-          "status" => \Illuminate\Http\Response::HTTP_NOT_FOUND,
-        ]);
-      }
+      $paire = Paire::where([["from", $from], ["to", $to]])->firstOrFail();
       $newAmonut = $this->getNewConvertedAmount($paire->conversion_rate, $amount);
       $paire->conversion_number = $paire->conversion_number + 1;
       $paire->save();
       return Response::json(
-        ["from" => $from, "to" => $to, "convertedAmount" => $newAmonut],
+        ["from" => strtoupper($from), "to" => strtoupper($to), "convertedAmount" => $newAmonut],
         \Illuminate\Http\Response::HTTP_OK
       );
-    } catch (\Exception $exception) {
-      return $exception;
+    } catch (ModelNotFoundException $exception) {
+      return Response::json(
+        [
+          "message" => "Désole, cette paire de conversion n'existe pas.",
+          "status" => \Illuminate\Http\Response::HTTP_NOT_FOUND,
+        ],
+        \Illuminate\Http\Response::HTTP_NOT_FOUND
+      );
     }
   }
 
