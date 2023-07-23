@@ -37,6 +37,7 @@ function signOut(to) {
       </template>
 
       <v-list>
+        <v-list-item to="/docs">Documentation</v-list-item>
         <v-list-item v-for="{ to, text } in routes" :to="to" :key="to">
           <v-list-item-title @click="signOut(to)">{{ text }}</v-list-item-title>
         </v-list-item>
@@ -44,8 +45,9 @@ function signOut(to) {
     </v-menu>
 
     <!-- Menu Desktop -->
-    <v-toolbar-items v-else-if="authStore.user">
-      <template v-for="{ to, text } in routes" :key="to">
+    <v-toolbar-items>
+      <v-btn to="/docs" variant="text">Documentation</v-btn>
+      <template v-if="authStore.user" v-for="{ to, text } in routes" :key="to">
         <v-btn :to="to" variant="text" @click.prevent="signOut(to)">{{ text }}</v-btn>
         <v-divider></v-divider>
       </template>
