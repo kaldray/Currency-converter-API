@@ -3,15 +3,10 @@ import { useRouter } from "vue-router";
 import { usePairs } from "@/composable/index.js";
 import { deletePairs } from "@/api/index.js";
 import { usePairStore } from "@/store/index.js";
-import { onMounted } from "vue";
 
-const { pairs, error } = usePairs();
 const pairStore = usePairStore();
+const { pairs, error } = usePairs();
 const router = useRouter();
-
-onMounted(() => {
-  pairStore.setPair(null);
-});
 
 /**
  * Delete the pairs from the DB
@@ -57,7 +52,7 @@ const redirectToUpdatePage = (data) => {
     <tbody class="border">
       <tr v-for="p in pairs.data" :key="p.id">
         <td class="text-center">{{ p.id }}</td>
-        <td class="text-center">{{ p.from }}-{{ p.to }}-</td>
+        <td class="text-center">{{ p.from }}-{{ p.to }}</td>
         <td class="text-center">{{ p.conversion_rate }}</td>
         <td class="text-center">{{ p.conversion_number }}</td>
         <td class="text-center">

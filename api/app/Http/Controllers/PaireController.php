@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PaireRequest;
 use App\Models\Paire;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Validation\ValidationException;
-use Symfony\Component\HttpFoundation\Session\FlashBagAwareSessionInterface;
 
 class PaireController extends Controller
 {
@@ -31,7 +29,10 @@ class PaireController extends Controller
         "status" => \Illuminate\Http\Response::HTTP_OK,
       ]);
     } catch (ValidationException $exception) {
-      return $exception;
+      return Response::json([
+        "message" => $exception,
+        "status" => \Illuminate\Http\Response::HTTP_OK,
+      ]);
     }
   }
 
@@ -55,7 +56,7 @@ class PaireController extends Controller
         "message" => "La paire a bien été modifié.",
         "status" => \Illuminate\Http\Response::HTTP_OK,
       ]);
-    } catch (\Exception $exception) {
+    } catch (ValidationException $exception) {
       return $exception;
     }
   }

@@ -1,6 +1,8 @@
 <script setup>
-import { reactive } from "vue";
+import { onBeforeUnmount, reactive } from "vue";
+import { usePairStore } from "@/store/index.js";
 
+const pairStore = usePairStore();
 const props = defineProps({ pair: Object, errors: Object || undefined });
 const emit = defineEmits(["updatePair", "createPair"]);
 const formState = reactive({
@@ -11,10 +13,15 @@ const formState = reactive({
   ...props?.pair,
 });
 
+onBeforeUnmount(() => {
+  pairStore.setPair(null);
+});
+
 function emitEvent() {
   emit("createPair", formState);
   emit("updatePair", formState);
 }
+console.log();
 </script>
 
 <template>
@@ -37,8 +44,8 @@ function emitEvent() {
         <v-alert
           class="mb-5 text-center"
           density="compact"
-          v-if="props.errors?.errors.conversion_rate"
-          :text="props.errors?.errors.conversion_rate[0]"
+          v-if="props.errors?.errors?.conversion_rate"
+          :text="props.errors?.errors?.conversion_rate[0]"
           type="warning"
         ></v-alert>
         <v-text-field
@@ -51,8 +58,8 @@ function emitEvent() {
         <v-alert
           class="mb-5 text-center"
           density="compact"
-          v-if="props.errors?.errors.conversion_number"
-          :text="props.errors?.errors.conversion_number[0]"
+          v-if="props.errors?.errors?.conversion_number"
+          :text="props.errors?.errors?.conversion_number[0]"
           type="warning"
         ></v-alert>
         <v-text-field
@@ -66,8 +73,8 @@ function emitEvent() {
         <v-alert
           class="mb-5 text-center"
           density="compact"
-          v-if="props.errors?.errors.from"
-          :text="props.errors?.errors.from[0]"
+          v-if="props.errors?.errors?.from"
+          :text="props.errors?.errors?.from[0]"
           type="warning"
         ></v-alert>
         <v-text-field
@@ -81,12 +88,19 @@ function emitEvent() {
         <v-alert
           class="mb-5 text-center"
           density="compact"
-          v-if="props.errors?.errors.to"
-          :text="props.errors?.errors.to[0]"
+          v-if="props.errors?.errors?.to"
+          :text="props.errors?.errors?.to[0]"
           type="warning"
         ></v-alert>
         <v-btn type="submit" block color="blue" variant="flat" v-if="props?.pair">Modifier</v-btn>
         <v-btn type="submit" block color="blue" variant="flat" v-else>AJouter</v-btn>
+        <v-alert
+          class="mt-5 text-center"
+          density="compact"
+          v-if="props?.errors?.message"
+          :text="props?.errors?.message"
+          type="warning"
+        ></v-alert>
       </v-col>
     </v-row>
   </v-form>
