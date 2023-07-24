@@ -9,7 +9,9 @@ services:
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_ROOT_HOST=db
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
       - MYSQL_DATABASE=bitnami_myapp
   api:
     image: docker.io/bitnami/laravel:latest
