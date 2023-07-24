@@ -60,6 +60,7 @@ function emitEvent() {
           density="comfortable"
           label="Devise de base"
           type="text"
+          :readonly="props?.pair !== undefined"
           v-model="formState.from"
         />
         <v-alert
@@ -74,6 +75,7 @@ function emitEvent() {
           density="comfortable"
           label="Nouvelle devise"
           type="text"
+          :readonly="props?.pair !== undefined"
           v-model="formState.to"
         />
         <v-alert
