@@ -57,7 +57,7 @@ const redirectToUpdatePage = (data) => {
     <tbody class="border">
       <tr v-for="p in pairs.data" :key="p.id">
         <td class="text-center">{{ p.id }}</td>
-        <td class="text-center">{{ p.to }}-{{ p.from }}</td>
+        <td class="text-center">{{ p.from }}-{{ p.to }}-</td>
         <td class="text-center">{{ p.conversion_rate }}</td>
         <td class="text-center">{{ p.conversion_number }}</td>
         <td class="text-center">
