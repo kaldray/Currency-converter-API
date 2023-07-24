@@ -14,5 +14,5 @@ const emitLogin = async (creditials) => {
 </script>
 
 <template>
-  <LoginForm @login="emitLogin" />
+  <LoginForm @login="emitLogin" :error="authStore.error" />
 </template>

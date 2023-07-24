@@ -2,6 +2,7 @@
 import { reactive, ref } from "vue";
 
 const formState = ref();
+const props = defineProps(["error"]);
 const formUser = reactive({
   email: "",
   password: "",
@@ -29,12 +30,7 @@ function submitForm() {
       <h1>Se connecter</h1>
     </v-col>
   </v-row>
-  <v-form
-    @submit.prevent="submitForm"
-    v-model="formState"
-    validate-on="blur"
-    class="mb-8"
-  >
+  <v-form @submit.prevent="submitForm" v-model="formState" validate-on="blur" class="mb-8">
     <v-row no-gutters>
       <v-col cols="12" sm="8" offset-sm="2" md="6" offset-md="3">
         <!-- Email -->
@@ -57,6 +53,12 @@ function submitForm() {
           :rules="[rules.required]"
         />
 
+        <v-alert
+          class="mb-5"
+          type="warning"
+          v-if="props?.error"
+          :title="props?.error?.message"
+        ></v-alert>
         <!-- VALIDATION -->
         <v-btn type="submit" block color="blue" variant="flat"> Envoyer </v-btn>
       </v-col>

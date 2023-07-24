@@ -29,6 +29,7 @@ apiClient.interceptors.response.use(
         const authStore = useAuthStore();
         authStore.user.value = null;
         router.replace("/");
+        return Promise.reject(apiError);
       }
       return Promise.reject(apiError);
     }
