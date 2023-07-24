@@ -30,6 +30,7 @@ export const useAuthStore = defineStore(
         const response = await signOut();
         if (response.status === 200) {
           user.value = null;
+          error.value = null;
           router.push("/");
         }
       } catch (err) {

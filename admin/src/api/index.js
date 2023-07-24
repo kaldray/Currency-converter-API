@@ -28,6 +28,7 @@ apiClient.interceptors.response.use(
       if (error.response.status === 401) {
         const authStore = useAuthStore();
         authStore.user.value = null;
+        authStore.error.value = null;
         router.replace("/");
         return Promise.reject(apiError);
       }
