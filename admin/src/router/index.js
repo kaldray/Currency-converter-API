@@ -32,7 +32,7 @@ const isGuest = (from) => {
  */
 const isAuthenticated = (to, from) => {
   const authStore = useAuthStore();
-  if (authStore.user !== null && to.name === "Login" && from.name !== "Login") {
+  if (authStore.user.value !== null && to.name === "Login" && from.name !== "Login") {
     return { name: "Admin" };
   }
 };
