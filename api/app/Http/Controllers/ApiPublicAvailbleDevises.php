@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ApiPublicAvailableDevisesResource;
+
 use App\Models\Paire;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class ApiPublicAvailbleDevises extends Controller
 {
-  public function available()
-  {
-    return ApiPublicAvailableDevisesResource::collection(
-      Paire::all(["from", "to", "conversion_number", "id", "conversion_rate"])
-    );
-  }
+
 
   public function conversion(Request $request, string $from, string $amount, string $to)
   {
@@ -26,7 +22,7 @@ class ApiPublicAvailbleDevises extends Controller
       $paire->save();
       return Response::json(
         ["from" => strtoupper($from), "to" => strtoupper($to), "convertedAmount" => $newAmonut],
-        \Illuminate\Http\Response::HTTP_OK
+        ResponseAlias::HTTP_OK
       );
     } catch (ModelNotFoundException $exception) {
       return Response::json(
@@ -34,7 +30,7 @@ class ApiPublicAvailbleDevises extends Controller
           "message" => "Désole, cette paire de conversion n'existe pas.",
           "status" => \Illuminate\Http\Response::HTTP_NOT_FOUND,
         ],
-        \Illuminate\Http\Response::HTTP_NOT_FOUND
+        ResponseAlias::HTTP_NOT_FOUND
       );
     }
   }

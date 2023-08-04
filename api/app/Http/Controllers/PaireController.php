@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PaireRequest;
+use App\Http\Resources\ApiPublicAvailableDevisesResource;
 use App\Models\Paire;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Validation\ValidationException;
@@ -14,7 +15,9 @@ class PaireController extends Controller
    */
   public function index()
   {
-    //
+      return ApiPublicAvailableDevisesResource::collection(
+          Paire::all()
+      );
   }
 
   /**

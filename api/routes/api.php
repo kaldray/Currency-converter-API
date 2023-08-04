@@ -24,6 +24,6 @@ Route::middleware("auth:sanctum")->group(function () {
 
 Route::post("/login", [LoginController::class, "index"]);
 Route::get("/logout", [LogoutController::class, "index"]);
-Route::get("/devises/available", [ApiPublicAvailbleDevises::class, "available"]);
+Route::get("/devises/available", [\App\Http\Controllers\PaireController::class, "index"]);
 Route::get("/{from}/{amount}/{to}", [ApiPublicAvailbleDevises::class, "conversion"]);
 Route::get("/state", [ApiPublicStateController::class, "state"]);
