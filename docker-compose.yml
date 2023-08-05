@@ -10,7 +10,7 @@ services:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_USER=root
+      - MYSQL_USER=test
       - MYSQL_PASSWORD=root
       - MYSQL_DATABASE=bitnami_myapp
   api:
