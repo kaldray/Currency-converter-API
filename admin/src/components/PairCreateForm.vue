@@ -114,13 +114,6 @@ function emitEvent() {
         ></v-alert>
         <v-btn type="submit" block color="blue" variant="flat" v-if="props?.pair">Modifier</v-btn>
         <v-btn type="submit" block color="blue" variant="flat" v-else>AJouter</v-btn>
-        <v-alert
-          class="mt-5 text-center"
-          density="compact"
-          v-if="props?.errors?.message"
-          :text="props?.errors?.message"
-          type="warning"
-        ></v-alert>
       </v-form>
     </v-col>
   </v-row>

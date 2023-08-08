@@ -64,7 +64,7 @@ function emitEvent() {
           density="comfortable"
           label="Devise de base"
           type="text"
-          :readonly="props?.pair !== undefined"
+          :readonly="true"
           v-model="formState.from"
         />
         <v-alert
@@ -79,7 +79,7 @@ function emitEvent() {
           density="comfortable"
           label="Nouvelle devise"
           type="text"
-          :readonly="props?.pair !== undefined"
+          :readonly="true"
           v-model="formState.to"
         />
         <v-alert
@@ -90,13 +90,6 @@ function emitEvent() {
           type="warning"
         ></v-alert>
         <v-btn type="submit" block color="blue" variant="flat">Modifier</v-btn>
-        <v-alert
-          class="mt-5 text-center"
-          density="compact"
-          v-if="props?.errors?.message"
-          :text="props?.errors?.message"
-          type="warning"
-        ></v-alert>
       </v-col>
     </v-row>
   </v-form>
