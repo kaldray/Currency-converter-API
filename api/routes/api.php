@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware("auth:sanctum")->group(function () {
   Route::apiResource("paire", \App\Http\Controllers\PaireController::class);
+  Route::get("/devises/all", [App\Http\Controllers\DevisesController::class, "index"]);
 });
 
 Route::post("/login", [LoginController::class, "index"]);
