@@ -35,7 +35,7 @@ apiClient.interceptors.response.use(
       return Promise.reject(apiError);
     }
     return Promise.reject(error);
-  },
+  }
 );
 
 export const getCsrfToken = async () => {
@@ -61,6 +61,8 @@ export const signOut = async () => {
 /**
  * @typedef {{ from: string,to: string,conversion_number:number,id:number,conversion_rate:number }} Pair
  *  @typedef {{data:Pair[]}} Pairs
+ *  @typedef {{id: number,name: string,created_at: string,updated_at: string}} Devise
+ *  @typedef {{data:Devise[]}} Devises
  * */
 
 /**
@@ -99,5 +101,14 @@ export const modifyPair = async (pair) => {
  */
 export const addPair = async (pair) => {
   const response = await apiClient.post(`/paire`, pair);
+  return response.data;
+};
+
+/**
+ * Get all devises
+ * @returns {Promise<Devises>}
+ */
+export const getAllDevises = async () => {
+  const response = await apiClient.get("/devises/all");
   return response.data;
 };

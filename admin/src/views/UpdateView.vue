@@ -1,11 +1,9 @@
 <script setup>
 import { ref } from "vue";
 import { modifyPair } from "@/api/index.js";
-import { usePairStore } from "@/store/index.js";
-import PairForm from "@/components/PairForm.vue";
+import PairForm from "@/components/PairUpdateForm.vue";
 import { router } from "@/router/index.js";
 
-const pairStore = usePairStore();
 const errors = ref(null);
 
 async function emitUpdatePair(pair) {
@@ -21,5 +19,5 @@ async function emitUpdatePair(pair) {
 </script>
 
 <template>
-  <PairForm :pair="pairStore.pair" @update-pair="emitUpdatePair" :errors="errors" />
+  <PairForm @update-pair="emitUpdatePair" :errors="errors" />
 </template>

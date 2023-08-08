@@ -1,8 +1,8 @@
 <script setup>
-import PairForm from "@/components/PairForm.vue";
 import { addPair } from "@/api/index.js";
 import { ref } from "vue";
 import { router } from "@/router/index.js";
+import PairCreateForm from "@/components/PairCreateForm.vue";
 
 const errors = ref(null);
 
@@ -19,5 +19,5 @@ const emitCreatePair = async (pair) => {
 </script>
 
 <template>
-  <PairForm @create-pair="emitCreatePair" :errors="errors" />
+  <PairCreateForm @create-pair="emitCreatePair" :errors="errors" />
 </template>
