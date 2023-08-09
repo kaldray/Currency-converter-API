@@ -112,8 +112,7 @@ function emitEvent() {
           :text="props.errors?.errors?.to[0]"
           type="warning"
         ></v-alert>
-        <v-btn type="submit" block color="blue" variant="flat" v-if="props?.pair">Modifier</v-btn>
-        <v-btn type="submit" block color="blue" variant="flat" v-else>AJouter</v-btn>
+        <v-btn type="submit" block color="blue" variant="flat">AJouter</v-btn>
       </v-form>
     </v-col>
   </v-row>

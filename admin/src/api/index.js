@@ -3,6 +3,22 @@ import axios, { AxiosError } from "axios";
 import { router } from "@/router/index.js";
 import { useAuthStore } from "@/store";
 
+/**
+ * @typedef {{ from: string,to: string,conversion_number:number,id:number,conversion_rate:number }} Pair
+ *  @typedef {{data:Pair[]}} Pairs
+ *  @typedef {{id: number,name: string,created_at: string,updated_at: string}} Devise
+ *  @typedef {{data:Devise[]}} Devises
+ * */
+
+/** @typedef {object} ValidationError
+ * @property {string} message
+ * @property {object} errors
+ * @property {string[] | undefined} errors.conversion_number
+ * @property {string[] | undefined} errors.conversion_rate
+ * @property {string[] | undefined} errors.from
+ * @property {string[] | undefined} errors.to
+ */
+
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_ENDPOINT,
   withCredentials: true,
@@ -57,13 +73,6 @@ export const signOut = async () => {
   const response = await apiClient.get("/logout");
   return response.data;
 };
-
-/**
- * @typedef {{ from: string,to: string,conversion_number:number,id:number,conversion_rate:number }} Pair
- *  @typedef {{data:Pair[]}} Pairs
- *  @typedef {{id: number,name: string,created_at: string,updated_at: string}} Devise
- *  @typedef {{data:Devise[]}} Devises
- * */
 
 /**
  * Return the list of available paris
