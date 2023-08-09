@@ -5,7 +5,8 @@
   "scripts": {
     "admin":  "cd admin && pnpm run dev",
     "api": "docker compose up -d",
-    "dev": "pnpm api && pnpm admin"
+    "dev": "pnpm api && pnpm admin",
+    "stop": "docker compose stop db api phpmyadmin"
   },
   "keywords": [],
   "author": "",
