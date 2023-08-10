@@ -9,6 +9,8 @@ services:
       - "./api/.env"
     image: mysql
   api:
+    env_file:
+      - "./api/.env"
     image: docker.io/bitnami/laravel:latest
     ports:
       - '8000:8000'
